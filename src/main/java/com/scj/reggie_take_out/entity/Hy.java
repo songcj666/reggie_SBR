@@ -1,4 +1,4 @@
 package com.scj.reggie_take_out.entity;
 
-public class Rtu {
+public class Hy {
 }
