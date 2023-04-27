@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scj.reggie_take_out.mapper.AntennasMapper">
+    <resultMap id="BaseResultMap" type="com.scj.reggie_take_out.entity.Antennas">
+        <id column="id" property="id" />
+        <result column="waveform" property="waveform" />
+        <result column="antenna" property="antenna" />
+        <result column="frequency" property="frequency" />
+        <result column="name" property="name" />
+        <result column="maxGain" property="maxGain" />
+        <result column="polar" property="polar" />
+        <result column="hpbw" property="hpbw" />
+        <result column="fnbw" property="fnbw" />
+        <result column="threshold" property="threshold" />
+        <result column="loss" property="loss" />
+        <result column="vswr" property="vswr" />
+    </resultMap>
+<!--    int updateLocation(Long id, double frequency, String waveform);-->
+    <update id="updateLocation">
+        update antennas
+        set frequency=#{frequency}, waveform=#{waveform}
+        where id = #{id}
+    </update>
+
+<!--    boolean hdipSave(Antennas antennas);-->
+    <insert id="hdipSave">
+        insert into antennas(id, waveform, frequency, `name`, max_gain, polar, threshold, loss, vswr, antenna)
+        values (#{id}, #{waveform}, #{frequency}, #{name}, #{maxGain}, #{polar}, #{threshold}, #{loss}, #{vswr}, #{antenna})
+    </insert>
+
+    <!--    boolean omniSave(Antennas antennas);-->
+    <insert id="omniSave">
+        insert into antennas(id, waveform, frequency, `name`, max_gain, polar, hpbw, fnbw, threshold, loss, vswr, antenna)
+        values (#{id}, #{waveform}, #{frequency}, #{name}, #{maxGain}, #{polar}, #{hpbw}, #{fnbw}, #{threshold}, #{loss}, #{vswr}, #{antenna})
+    </insert>
+
+    <!--    boolean smonoSave(Antennas antennas);-->
+    <insert id="smonoSave">
+        insert into antennas(id, waveform, frequency, `name`, max_gain, polar, threshold, loss, vswr, antenna)
+        values (#{id}, #{waveform}, #{frequency}, #{name}, #{maxGain}, #{polar}, #{threshold}, #{loss}, #{vswr}, #{antenna})
+    </insert>
+
+    <select id="hdipList" resultType="com.scj.reggie_take_out.entity.Antennas">
+        select antennas.*
+        from antennas
+        where antenna = #{antenna}
+    </select>
+
+    <select id="omniList" resultType="com.scj.reggie_take_out.entity.Antennas">
+        select antennas.*
+        from antennas
+        where antenna = #{antenna}
+    </select>
+
+    <select id="smonoList" resultType="com.scj.reggie_take_out.entity.Antennas">
+        select antennas.*
+        from antennas
+        where antenna = #{antenna}
+    </select>
+
+    <select id="listAllAntennas" resultType="com.scj.reggie_take_out.entity.Antennas">
+        select antennas.*
+        from antennas
+        where antenna = #{antenna}
+    </select>
+
+    <delete id="removeAntennasById">
+        delete
+        from antennas
+        where  id = #{id}
+    </delete>
+</mapper>

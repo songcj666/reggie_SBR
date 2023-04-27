@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scj.reggie_take_out.mapper.TxdataMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.scj.reggie_take_out.entity.Txdata">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="antenna" property="antenna" />
+        <result column="power" property="power" />
+        <result column="longitude" property="longitude" />
+        <result column="latitude" property="latitude" />
+        <result column="height" property="height" />
+        <result column="size" property="size" />
+        <result column="flag" property="flag" />
+        <result column="layer" property="layer" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, `name`, antenna, power, longitude, latitude, height, `size`, flag, layer
+    </sql>
+
+    <update id="updateLocation">
+        update txdata
+        set longitude=#{longitude}, latitude=#{latitude}
+        where flag = #{flag}
+    </update>
+
+    <insert id="save">
+        insert into txdata(id, `name`, antenna, power, longitude, latitude, height, `size`, flag, layer)
+        values (#{id}, #{name}, #{antenna}, #{power}, #{longitude}, #{latitude}, #{height}, #{size}, #{flag}, #{layer})
+    </insert>
+
+    <select id="getTxPosition" resultType="com.scj.reggie_take_out.entity.Txdata">
+        select longitude, latitude, height
+        from txdata
+        where name = #{txName}
+    </select>
+
+    <select id="listAllTxdata" resultType="com.scj.reggie_take_out.entity.Txdata">
+        select id, `name`, antenna, power, longitude, latitude, height, `size`, flag, layer
+        from txdata
+    </select>
+
+    <select id="listAllTxname" resultType="String">
+        select name from txdata
+    </select>
+
+    <delete id="removeTxdataById">
+        delete
+        from txdata
+        where  id = #{id}
+    </delete>
+
+</mapper>

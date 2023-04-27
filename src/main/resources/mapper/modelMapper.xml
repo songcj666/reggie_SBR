@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scj.reggie_take_out.mapper.ModelMapper">
+
+<!--    int updateLocation(String name, double longitude, double latitude);-->
+    <update id="updateLocation">
+        update model
+        set longitude=#{longitude}, latitude=#{latitude}
+        where flag = #{flag}
+    </update>
+
+<!--    boolean save(Model model);-->
+    <insert id="save">
+        insert into model(`name`, material, longitude, latitude, layer, `scale`, height, flag)
+        values (#{name}, #{material}, #{longitude}, #{latitude}, #{layer}, #{scale}, #{height}, #{flag})
+    </insert>
+
+    <select id="listAllModel" resultType="com.scj.reggie_take_out.entity.Model">
+        select id, `name`, material,  longitude, latitude, layer, `scale`, height, flag
+        from model
+    </select>
+
+    <delete id="removeModelById">
+        delete
+        from model
+        where  id = #{id}
+    </delete>
+</mapper>

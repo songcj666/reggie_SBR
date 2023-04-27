@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scj.reggie_take_out.mapper.RxscircledataMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.scj.reggie_take_out.entity.Rxscircledata">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="antenna" property="antenna" />
+        <result column="radius" property="radius" />
+        <result column="intervals" property="intervals" />
+        <result column="centerPointLong" property="centerPointLong" />
+        <result column="centerPointLat" property="centerPointLat" />
+        <result column="endPointLong" property="endPointLong" />
+        <result column="endPointLat" property="endPointLat" />
+        <result column="circleRadius" property="circleRadius" />
+        <result column="height" property="height" />
+        <result column="size" property="size" />
+        <result column="flag" property="flag" />
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, `name`, antenna, radius, intervals, center_point_long, center_point_lat, end_point_long, end_point_lat, circle_radius, height, `size`, flag ,layer
+    </sql>
+    <update id="updateLocation">
+        update rxscircledata
+        set longitude=#{longitude}, latitude=#{latitude}
+        where flag = #{flag}
+    </update>
+
+    <insert id="save" parameterType="com.scj.reggie_take_out.entity.Rxscircledata" keyProperty="id">
+        insert into rxscircledata(`name`, antenna, radius, intervals, center_point_long, center_point_lat, end_point_long, end_point_lat, circle_radius, height, `size`, flag )
+        values (#{name}, #{antenna}, #{radius}, #{intervals}, #{centerPointLong}, #{centerPointLat}, #{endPointLong}, #{endPointLat}, #{circleRadius},
+                #{height}, #{size}, #{flag} )
+    </insert>
+
+
+    <select id="listAllRxscircledata" resultType="com.scj.reggie_take_out.entity.Rxscircledata">
+        select rxscircledata.*
+        from rxscircledata
+    </select>
+
+    <select id="listAnteByName" resultType="com.scj.reggie_take_out.entity.Antennas">
+      select * from antennas
+      where antenna = #{antenna};
+    </select>
+
+    <select id="queryTwoPointPos" resultType="com.scj.reggie_take_out.entity.Rxscircledata">
+        select *
+        from rxscircledata
+        where name = #{rxsName}
+    </select>
+
+    <delete id="removeRxscircledataById">
+        delete
+        from rxscircledata
+        where  id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scj.reggie_take_out.mapper.RxsModelDataMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.scj.reggie_take_out.entity.RxsModelData">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="antenna" property="antenna" />
+        <result column="radius" property="radius" />
+        <result column="intervals" property="intervals" />
+        <result column="length" property="length" />
+        <result column="width" property="width" />
+        <result column="leftUpLong" property="leftUpLong" />
+        <result column="leftUpLat" property="leftUpLat" />
+        <result column="rightDownLong" property="rightDownLong" />
+        <result column="rightDownLat" property="rightDownLat" />
+        <result column="leftUpPointX" property="leftUpPointX" />
+        <result column="leftUpPointY" property="leftUpPointY" />
+        <result column="leftUpPointZ" property="leftUpPointZ" />
+        <result column="height" property="height" />
+        <result column="size" property="size" />
+        <result column="flag" property="flag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, `name`, antenna, radius, intervals, `length`, width, left_up_long, left_up_lat, right_down_long, right_down_lat, left_up_point_x, left_up_point_y, left_up_point_z, height, `size`, flag
+    </sql>
+
+    <update id="updateLocation">
+        update rxsmodeldata
+        set longitude=#{longitude}, latitude=#{latitude}
+        where flag = #{flag}
+    </update>
+
+    <insert id="save" parameterType="com.scj.reggie_take_out.entity.Rxsdata" keyProperty="id">
+        insert into rxsmodeldata(`name`, antenna, radius, intervals, `length`, width, left_up_long, left_up_lat, right_down_long, right_down_lat, left_up_point_x, left_up_point_y, left_up_point_z, height, `size`, flag )
+        values (#{name}, #{antenna}, #{radius}, #{intervals}, #{length}, #{width}, #{leftUpLong}, #{leftUpLat}, #{rightDownLong}, #{rightDownLat},
+                #{leftUpPointX}, #{leftUpPointY}, #{leftUpPointZ},
+                #{height}, #{size}, #{flag} )
+    </insert>
+
+
+    <select id="listAllRxsModelData" resultType="com.scj.reggie_take_out.entity.RxsModelData">
+        select rxsmodeldata.*
+        from rxsmodeldata
+    </select>
+
+    <select id="queryTwoPointPos" resultType="com.scj.reggie_take_out.entity.RxsModelData">
+        select *
+        from rxsmodeldata
+        where name = #{rxsName}
+    </select>
+
+    <delete id="removeRxsModelDataById">
+        delete
+        from rxsmodeldata
+        where  id = #{id}
+    </delete>
+
+</mapper>

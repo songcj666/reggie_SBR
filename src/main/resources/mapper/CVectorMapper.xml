@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scj.reggie_take_out.mapper.CVectorMapper">
+
+
+    <select id="heightNotZero" resultType="com.scj.reggie_take_out.entity.CVector">
+        select rxs_name, v_x, v_y, v_z
+        from c_vector
+        where rxs_name = #{rxsName} AND v_z > 0.0
+    </select>
+
+</mapper>
